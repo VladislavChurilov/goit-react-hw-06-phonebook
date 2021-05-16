@@ -5,6 +5,10 @@ import { connect } from 'react-redux';
 import actions from '../../redux/actions';
 
 class Form extends Component {
+  state = {
+    name: '',
+    number: '',
+  };
   nameId = uuidv4();
   handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -20,6 +24,7 @@ class Form extends Component {
   };
 
   render() {
+    const { name, number } = this.state;
     return (
       <form className={styles.form} onSubmit={this.handleSubmit}>
         <label htmlFor={this.nameId}> Name </label>
@@ -30,6 +35,7 @@ class Form extends Component {
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           id={this.nameId}
+          value={name}
           title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
           required
         />
@@ -38,6 +44,7 @@ class Form extends Component {
           className={styles.input}
           type="tel"
           name="number"
+          value={number}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
           onChange={this.handleChange}

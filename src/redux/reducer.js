@@ -4,7 +4,13 @@ import types from './types';
 const contacts = (state = [], { type, payload }) => {
   switch (type) {
     case types.ADD:
-      return [...state, payload];
+      const duplication = state.find(
+        ({ name }) => name.toLowerCase() === payload.name.toLowerCase(),
+      );
+      if (duplication) {
+        alert(`${payload.name} is alredy in contacts`);
+      }
+      return duplication ? state : [...state, payload];
     case types.DELETE:
       return state.filter(({ id }) => id !== payload);
     default:
